@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const adminRouter = require('./routes/admin');
 const shopRouter = require('./routes/shop');
@@ -11,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: false})); //registering a parser
 app.use('/admin',adminRouter.router); //filtering routes using /admin
 app.use(shopRouter.router);
 app.use((req, res, next)=>{
-    res.status(404).send('<h1>404 Page not found!!</h1>');
+    res.status(404).sendFile(path.join(__dirname,'views','404.html'))
 })
 
 // app.use('/', (req, res, next) => {
