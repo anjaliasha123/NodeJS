@@ -6,8 +6,9 @@ const adminRouter = require('./routes/admin');
 const shopRouter = require('./routes/shop');
 
 const app = express();
-app.use(bodyParser.urlencoded({extended: false})); //registering a parser
 
+app.use(bodyParser.urlencoded({extended: false})); //registering a parser
+app.use(express.static(path.join(__dirname,'public')));
 //routing
 app.use('/admin',adminRouter.router); //filtering routes using /admin
 app.use(shopRouter.router);
