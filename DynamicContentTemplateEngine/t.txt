@@ -1,0 +1,5 @@
+Templating engines
+-htmlish template
+-node express content
+-replaces placeholder with html content
+-ejs, pug, handlebars
