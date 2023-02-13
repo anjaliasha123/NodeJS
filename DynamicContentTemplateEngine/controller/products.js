@@ -1,4 +1,4 @@
-const products = [];
+const Product = require('../models/product');
 
 let getAddProducts = (req, res, next)=>{
     console.log('In the admin middleware');
@@ -8,13 +8,14 @@ let getAddProducts = (req, res, next)=>{
 
 let postAddProducts = (req, res, next)=>{
     console.log('Post operation..');
-    products.push(req.body.title);
-    console.log('products: ',products);
+    const prod = new Product(req.body.title);
+    prod.save();
     res.redirect('/');
 }
 
 let getProducts = (req, res, next)=>{
     console.log('In the shop middleware');
+    const products = Product.fetchAll();
     // res.sendFile(path.join(__dirname,'../','views','shop.html'));
     res.render('shop',{addTitle: 'Shop Page', prods: products})
 }
