@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const errorController = require('./controller/error');
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: false}));
@@ -14,11 +15,7 @@ console.log('Prtoducts: ', productsList);
 app.use(express.static(path.join(__dirname,'public')));
 app.use('/admin',adminRouter.router);
 app.use(shopRouter.router);
-app.use((req, res, next)=>{
-    // res.status(404).sendFile(path.join(__dirname,'./','views','404.html'));
-    res.status(404).render('404', {pageTitle: 'Page! not found 404!'});
-    
-})
+app.use(errorController.get404);
 
 app.listen(3000, ()=>{
     console.log('Listening to the port')
